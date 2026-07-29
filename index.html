@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>学习压力觉察｜辅导处AI助理</title>
+  <style>
+    :root{--blue:#1267d6;--deep:#0b4fa9;--ink:#17324d;--muted:#65798c;--line:#d8e7f4;--pale:#eef7ff;--green:#318f50;--orange:#e98615}
+    *{box-sizing:border-box}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;color:var(--ink);background:linear-gradient(145deg,#edf7ff,#fff 48%,#eefaf5)}
+    button,input,textarea{font:inherit}.page{min-height:100vh;padding:18px}.card{width:min(920px,100%);margin:auto;background:#fff;border:1px solid var(--line);border-radius:26px;padding:clamp(22px,5vw,50px);box-shadow:0 20px 60px #1c5c9618}
+    .brand{display:inline-block;padding:8px 14px;border-radius:999px;background:var(--pale);color:var(--blue);font-weight:800}.hero h1{font-size:clamp(38px,7vw,68px);margin:20px 0 10px;color:var(--deep)}
+    .lead,.note{color:var(--muted);line-height:1.75}.facts{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}.facts span{padding:9px 13px;border:1px solid var(--line);border-radius:12px;font-weight:700}
+    .identity{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.identity label{display:grid;gap:7px;font-weight:800}input,textarea{width:100%;border:1px solid #bcd3e8;border-radius:12px;padding:13px;background:#fbfdff}
+    button{border:0;border-radius:13px;padding:14px 22px;font-weight:800;cursor:pointer}.primary{color:#fff;background:linear-gradient(135deg,var(--blue),var(--deep));box-shadow:0 9px 22px #1267d62b}.primary:disabled{opacity:.45;cursor:not-allowed}
+    .message{padding:12px 14px;border:1px solid #efc19e;border-radius:12px;background:#fff7ef;color:#8c4818;font-weight:700}.hidden{display:none!important}
+    .top{position:sticky;top:8px;z-index:3;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:15px 18px;background:#fffffff0;border:1px solid var(--line);border-radius:17px;backdrop-filter:blur(10px)}
+    .progress{width:260px;height:11px;background:#e5eef7;border-radius:20px}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),#42ae71);border-radius:20px}.progress small{display:block;text-align:right;margin-top:4px}
+    #questions{display:grid;gap:13px;margin-top:16px}fieldset{border:1px solid var(--line);border-radius:17px;padding:19px;background:#fff}legend{font-weight:800;line-height:1.55}legend b{display:inline-grid;place-items:center;width:29px;height:29px;margin-right:9px;border-radius:50%;background:var(--blue);color:#fff}
+    .choices{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:13px}.choices label{padding:11px 5px;border:1px solid #ccdeed;border-radius:11px;text-align:center;cursor:pointer}.choices input{display:none}.choices label:has(input:checked){background:#eaf4ff;border-color:var(--blue);color:var(--blue);font-weight:800}
+    textarea{min-height:90px;margin-top:10px;resize:vertical}.submit{width:100%;margin:4px 0 25px}.report header{display:flex;justify-content:space-between;gap:18px;border-bottom:2px solid #e6eff7;padding-bottom:20px}.report h1{margin:7px 0}.badge{min-width:200px;display:grid;place-content:center;text-align:center;padding:16px;border-radius:17px;background:var(--pale)}.badge b{font-size:22px;color:var(--blue)}
+    .block{padding:20px;border-radius:16px;margin-top:16px;line-height:1.8}.recent{background:var(--pale)}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.strength{background:#eff9f1;border-left:5px solid var(--green)}.action{background:#fff7e9;border-left:5px solid var(--orange)}.finish{width:100%;border:1px solid var(--blue);background:#fff;color:var(--blue)}
+    @media(max-width:700px){.page{padding:10px}.card{padding:22px;border-radius:20px}.identity,.two{grid-template-columns:1fr}.choices{grid-template-columns:1fr 1fr}.top{top:4px}.progress{width:120px}.report header{display:grid}.badge{min-width:0}}
+  </style>
+</head>
+<body>
+  <main id="intro" class="page"><section class="card hero">
+    <span class="brand">辅导处AI助理 · 演示版</span><h1>学习压力觉察</h1>
+    <p class="lead">花约5分钟，了解你最近两周的学习状态。答案没有对错，请按照真实感受作答。</p>
+    <div class="facts"><span>18道点选题</span><span>2道选答题</span><span>完成后查看个人反馈</span></div>
+    <div class="identity">
+      <label>学生姓名<input id="studentName" placeholder="请输入姓名"></label>
+      <label>学生代号<input id="studentCode" placeholder="例如 DEMO-001"></label>
+      <label>班级<input id="className" value="初二A班"></label>
+    </div>
+    <p id="introMessage" class="message hidden"></p>
+    <button id="beginButton" class="primary">开始填写</button>
+    <p class="note">每名学生最多填写2次，以最新一次作为当前分析样本。资料仅用于教育观察与辅导参考，不作为心理或医学诊断。</p>
+  </section></main>
+
+  <main id="survey" class="page hidden"><section class="card">
+    <header class="top"><div><b>学习压力觉察</b><br><small id="identityLine"></small></div><div class="progress"><i id="bar"></i><small id="count">0/18</small></div></header>
+    <form id="questions"></form>
+    <p id="submitMessage" class="message hidden"></p>
+    <button id="submitButton" class="primary submit" disabled>还需完成 18 题</button>
+  </section></main>
+
+  <main id="report" class="page hidden"><article class="card report">
+    <header><div><span class="brand">学生个人反馈报告</span><h1 id="reportTitle"></h1><p id="reportMeta" class="note"></p></div><div class="badge">近期状态<b id="level"></b></div></header>
+    <section class="block recent"><h2>最近的你</h2><p id="recentText"></p></section>
+    <div class="two"><section class="block strength"><h2>你的力量</h2><p id="strengthText"></p></section><section class="block action"><h2>本周行动建议</h2><p>选择目前最担心的一项学习任务，把它拆成三个可以完成的小步骤。先完成第一步，不必要求自己一次解决所有问题。</p></section></div>
+    <p class="block">如果压力持续影响睡眠、上课状态或日常生活，请主动告诉信任的老师、家长或学校辅导人员。</p>
+    <p class="note">本报告根据你最近两周的回答生成，用于自我觉察与教育辅导参考，不是心理或医学诊断。</p>
+    <button class="finish" onclick="location.reload()">完成</button>
+  </article></main>
+
+  <script>
+    const API_URL="https://script.google.com/macros/s/AKfycbx6RlEinGB5si-4izaY8eilXCeCQKft5QOxd8f9rxAl-t7alWOn_syO-Yy-5lmmR-Oo/exec";
+    const ACTIVITY_ID="ACT-LP-DEMO-001";
+    const questions=[
+      ["LP_A01","学习任务负担","我觉得每天需要完成的学习任务很多。"],["LP_A02","学习任务负担","即使已经努力，我仍常担心无法按时完成作业。"],["LP_A03","学习任务负担","多项学习任务同时出现时，我会感到难以应付。"],
+      ["LP_B01","考试与成绩担忧","考试临近时，我会明显感到紧张。"],["LP_B02","考试与成绩担忧","我担心成绩没有达到自己或他人的期望。"],["LP_B03","考试与成绩担忧","一次成绩不理想，会影响我之后的学习状态。"],
+      ["LP_C01","时间管理与作息","我常觉得学习时间不够用。"],["LP_C02","时间管理与作息","我会因为赶作业或复习而减少休息时间。"],["LP_C03","时间管理与作息","学习任务会影响我的睡眠或日常作息。"],
+      ["LP_D01","自我期待与挫折","当学习表现不如预期时，我容易责怪自己。"],["LP_D02","自我期待与挫折","遇到难题或跟不上进度时，我会感到挫败。"],["LP_D03","自我期待与挫折","我常觉得自己必须表现得比现在更好。"],
+      ["LP_E01","学习环境与支持压力","周围同学的学习表现会给我带来压力。"],["LP_E02","学习环境与支持压力","我感到老师或家长对我的学习要求较高。"],["LP_E03","学习环境与支持压力","当学习遇到困难时，我觉得很难获得需要的帮助。"],
+      ["LP_F01","调节与求助能力","感到学习压力时，我知道怎样让自己逐渐平静下来。"],["LP_F02","调节与求助能力","遇到无法解决的学习困难时，我愿意向他人求助。"],["LP_F03","调节与求助能力","我身边至少有一位愿意听我谈学习困难的人。"]];
+    const choices=["从不","很少","有时","经常","几乎总是"], answers={};
+    const $=id=>document.getElementById(id), show=id=>$(id).classList.remove("hidden"), hide=id=>$(id).classList.add("hidden");
+    questions.forEach((q,i)=>$("questions").insertAdjacentHTML("beforeend",`<fieldset><legend><b>${i+1}</b>${q[2]}</legend><div class="choices">${choices.map((c,j)=>`<label><input type="radio" name="${q[0]}" value="${j+1}">${c}</label>`).join("")}</div></fieldset>`));
+    $("questions").insertAdjacentHTML("beforeend",`<fieldset><legend><b>19</b>最近让你感到学习压力最大的一件事是什么？（选答）</legend><textarea id="open1"></textarea></fieldset><fieldset><legend><b>20</b>你希望老师、家长或学校为你提供什么帮助？（选答）</legend><textarea id="open2"></textarea></fieldset>`);
+    $("questions").addEventListener("change",e=>{if(e.target.name)answers[e.target.name]=+e.target.value;const n=Object.keys(answers).length;$("bar").style.width=n/18*100+"%";$("count").textContent=n+"/18";$("submitButton").disabled=n!==18;$("submitButton").textContent=n===18?"提交并查看个人反馈":`还需完成 ${18-n} 题`;});
+
+    function jsonp(params){
+      return new Promise((resolve,reject)=>{const cb="cb_"+Date.now()+"_"+Math.random().toString(36).slice(2);const s=document.createElement("script");const timer=setTimeout(()=>done(new Error("连接超时")),12000);
+        function done(v){clearTimeout(timer);delete window[cb];s.remove();v instanceof Error?reject(v):resolve(v)} window[cb]=done;s.onerror=()=>done(new Error("连接失败"));s.src=API_URL+"?"+new URLSearchParams({...params,callback:cb});document.body.appendChild(s);});
+    }
+    function message(id,text){$(id).textContent=text;show(id)}
+    $("beginButton").onclick=async()=>{const studentName=$("studentName").value.trim(),studentCode=$("studentCode").value.trim(),className=$("className").value.trim();hide("introMessage");
+      if(!studentName||!studentCode||!className)return message("introMessage","请完整填写姓名、学生代号和班级");
+      if(API_URL.includes("PASTE_"))return message("introMessage","页面尚未连接Apps Script接口");
+      $("beginButton").disabled=true;$("beginButton").textContent="正在检查活动状态…";
+      try{const r=await jsonp({action:"status",activityId:ACTIVITY_ID,studentName,studentCode,className});if(!r.success||!r.canSubmit)return message("introMessage",r.message||"本活动目前未开放填写");
+        $("identityLine").textContent=studentName+" · "+className;hide("intro");show("survey");scrollTo(0,0);
+      }catch(e){message("introMessage","暂时无法读取活动状态，请稍后再试")}finally{$("beginButton").disabled=false;$("beginButton").textContent="开始填写"}};
+    function calculate(){
+      const grouped={};questions.forEach(q=>(grouped[q[1]]??=[]).push(answers[q[0]]));const scores={};Object.entries(grouped).forEach(([k,v])=>scores[k]=+(v.reduce((a,b)=>a+b,0)/3).toFixed(1));
+      const support=scores["调节与求助能力"],stress=Object.entries(scores).filter(([k])=>k!=="调节与求助能力").sort((a,b)=>b[1]-a[1]);const overall=+([...stress.map(x=>x[1]),6-support].reduce((a,b)=>a+b,0)/6).toFixed(1);
+      const level=overall<2?"当前压力较少":overall<3?"偶有压力":overall<3.8?"压力较明显":"建议优先关注";return{scores,support,stress,overall,level};
+    }
+    $("submitButton").onclick=async e=>{e.preventDefault();if(Object.keys(answers).length!==18)return;hide("submitMessage");$("submitButton").disabled=true;$("submitButton").textContent="正在保存并生成反馈…";
+      const result=calculate(),payload={action:"submit",activityId:ACTIVITY_ID,studentName:$("studentName").value.trim(),studentCode:$("studentCode").value.trim(),className:$("className").value.trim(),open1:$("open1").value.trim(),open2:$("open2").value.trim(),answers:JSON.stringify(answers)};
+      try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},body:new URLSearchParams(payload)}).then(x=>x.json());if(!r.success)throw new Error(r.message||"提交失败");
+        const p=result.stress[0][0],s=result.stress[1][0];$("reportTitle").textContent=payload.studentName+"｜学习压力觉察";$("reportMeta").textContent=payload.className+" · 最近两周 · "+new Date().toLocaleDateString("zh-CN");$("level").textContent=result.level;
+        $("recentText").textContent=`你的回答显示，最近的学习压力主要集中在“${p}”和“${s}”。你可能很在意自己的学习表现，也希望事情能够按计划完成。这不代表你不够努力，而是当前承担的任务或期待可能比较多。`;
+        $("strengthText").textContent=result.support>=3.8?"你愿意在遇到困难时寻找帮助，身边也有可以沟通的人。这是很重要的支持力量。适时求助不是能力不足，而是解决问题的一种方法。":"你已经开始留意自己的压力。接下来，可以试着找一位信任的老师、家长或同学，说说最近最困扰你的事情。";
+        hide("survey");show("report");scrollTo(0,0);
+      }catch(err){message("submitMessage",err.message||"提交失败，请稍后再试");$("submitButton").disabled=false;$("submitButton").textContent="重新提交"}};
+  </script>
+</body>
+</html>
