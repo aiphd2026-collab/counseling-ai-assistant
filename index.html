@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>学习压力觉察｜辅导处AI助理</title>
   <style>
-    :root{--blue:#1267d6;--deep:#0b4fa9;--ink:#17324d;--muted:#65798c;--line:#d8e7f4;--pale:#eef7ff;--green:#318f50;--orange:#e98615}
-    *{box-sizing:border-box}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;color:var(--ink);background:linear-gradient(145deg,#edf7ff,#fff 48%,#eefaf5)}
-    button,input,textarea{font:inherit}.page{min-height:100vh;padding:18px}.card{width:min(920px,100%);margin:auto;background:#fff;border:1px solid var(--line);border-radius:26px;padding:clamp(22px,5vw,50px);box-shadow:0 20px 60px #1c5c9618}
-    .brand{display:inline-block;padding:8px 14px;border-radius:999px;background:var(--pale);color:var(--blue);font-weight:800}.hero h1{font-size:clamp(38px,7vw,68px);margin:20px 0 10px;color:var(--deep)}
+    :root{--coral:#e76f51;--coral-deep:#bd4f39;--amber:#e7a12d;--ink:#44362f;--muted:#786b64;--line:#eadbd0;--cream:#fff8ef;--peach:#fff0e6;--green:#4e9870;--teal:#438e91}
+    *{box-sizing:border-box}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 5%,#ffe1cd 0 9%,transparent 30%),linear-gradient(145deg,#fff4e8,#fffdf9 48%,#eef8f1)}
+    button,input,textarea{font:inherit}.page{min-height:100vh;padding:18px}.card{width:min(920px,100%);margin:auto;background:#fffdfb;border:1px solid var(--line);border-radius:26px;padding:clamp(22px,5vw,50px);box-shadow:0 22px 60px #8b5b3c20}
+    .brand{display:inline-block;padding:8px 14px;border-radius:999px;background:var(--peach);color:var(--coral-deep);font-weight:800}.hero h1{font-size:clamp(38px,7vw,68px);margin:20px 0 10px;color:#8f4538}
     .lead,.note{color:var(--muted);line-height:1.75}.facts{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}.facts span{padding:9px 13px;border:1px solid var(--line);border-radius:12px;font-weight:700}
-    .identity{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.identity label{display:grid;gap:7px;font-weight:800}input,textarea{width:100%;border:1px solid #bcd3e8;border-radius:12px;padding:13px;background:#fbfdff}
-    button{border:0;border-radius:13px;padding:14px 22px;font-weight:800;cursor:pointer}.primary{color:#fff;background:linear-gradient(135deg,var(--blue),var(--deep));box-shadow:0 9px 22px #1267d62b}.primary:disabled{opacity:.45;cursor:not-allowed}
+    .identity{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0;padding:18px;border-radius:18px;background:var(--cream)}.identity label{display:grid;gap:7px;font-weight:800}input,textarea{width:100%;border:1px solid #dfc9b9;border-radius:12px;padding:13px;background:#fff}
+    input:focus,textarea:focus{outline:3px solid #f6c9b8;border-color:var(--coral)}button{border:0;border-radius:13px;padding:14px 22px;font-weight:800;cursor:pointer}.primary{color:#fff;background:linear-gradient(135deg,#f08a67,var(--coral-deep));box-shadow:0 9px 22px #bd4f3930}.primary:disabled{opacity:.45;cursor:not-allowed}
     .message{padding:12px 14px;border:1px solid #efc19e;border-radius:12px;background:#fff7ef;color:#8c4818;font-weight:700}.hidden{display:none!important}
-    .top{position:sticky;top:8px;z-index:3;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:15px 18px;background:#fffffff0;border:1px solid var(--line);border-radius:17px;backdrop-filter:blur(10px)}
-    .progress{width:260px;height:11px;background:#e5eef7;border-radius:20px}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),#42ae71);border-radius:20px}.progress small{display:block;text-align:right;margin-top:4px}
-    #questions{display:grid;gap:13px;margin-top:16px}fieldset{border:1px solid var(--line);border-radius:17px;padding:19px;background:#fff}legend{font-weight:800;line-height:1.55}legend b{display:inline-grid;place-items:center;width:29px;height:29px;margin-right:9px;border-radius:50%;background:var(--blue);color:#fff}
-    .choices{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:13px}.choices label{padding:11px 5px;border:1px solid #ccdeed;border-radius:11px;text-align:center;cursor:pointer}.choices input{display:none}.choices label:has(input:checked){background:#eaf4ff;border-color:var(--blue);color:var(--blue);font-weight:800}
-    textarea{min-height:90px;margin-top:10px;resize:vertical}.submit{width:100%;margin:4px 0 25px}.report header{display:flex;justify-content:space-between;gap:18px;border-bottom:2px solid #e6eff7;padding-bottom:20px}.report h1{margin:7px 0}.badge{min-width:200px;display:grid;place-content:center;text-align:center;padding:16px;border-radius:17px;background:var(--pale)}.badge b{font-size:22px;color:var(--blue)}
-    .block{padding:20px;border-radius:16px;margin-top:16px;line-height:1.8}.recent{background:var(--pale)}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.strength{background:#eff9f1;border-left:5px solid var(--green)}.action{background:#fff7e9;border-left:5px solid var(--orange)}.finish{width:100%;border:1px solid var(--blue);background:#fff;color:var(--blue)}
+    .top{position:sticky;top:8px;z-index:3;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:15px 18px;background:#fffaf5f0;border:1px solid var(--line);border-radius:17px;backdrop-filter:blur(10px)}
+    .progress{width:260px;height:11px;background:#f2e5da;border-radius:20px}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ef8b68,#e9b33f,#55a27b);border-radius:20px}.progress small{display:block;text-align:right;margin-top:4px}
+    #questions{display:grid;gap:13px;margin-top:16px}fieldset{--accent:var(--coral);--soft:#fff4ee;border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:17px;padding:19px;background:linear-gradient(120deg,var(--soft),#fff 46%)}fieldset.dim-a{--accent:#e76f51;--soft:#fff0e9}fieldset.dim-b{--accent:#dda22f;--soft:#fff8df}fieldset.dim-c{--accent:#4d9a91;--soft:#eaf8f5}fieldset.dim-d{--accent:#8b72ba;--soft:#f4effc}fieldset.dim-e{--accent:#5988bf;--soft:#edf5fc}fieldset.dim-f{--accent:#5b9c68;--soft:#edf8ef}fieldset.open{--accent:#c88255;--soft:#fff5ec}legend{font-weight:800;line-height:1.55}legend b{display:inline-grid;place-items:center;width:29px;height:29px;margin-right:9px;border-radius:50%;background:var(--accent);color:#fff}
+    .choices{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:13px}.choices label{padding:11px 5px;border:1px solid #dfd0c5;border-radius:11px;text-align:center;cursor:pointer;background:#fff}.choices input{display:none}.choices label:has(input:checked){background:var(--soft);border-color:var(--accent);color:var(--accent);font-weight:800;box-shadow:inset 0 0 0 1px var(--accent)}
+    textarea{min-height:90px;margin-top:10px;resize:vertical}.submit{width:100%;margin:4px 0 25px}.report header{display:flex;justify-content:space-between;gap:18px;border-bottom:2px solid #f0dfd2;padding-bottom:20px}.report h1{margin:7px 0}.badge{min-width:200px;display:grid;place-content:center;text-align:center;padding:16px;border-radius:17px;background:var(--peach)}.badge b{font-size:22px;color:var(--coral-deep)}
+    .block{padding:20px;border-radius:16px;margin-top:16px;line-height:1.8}.recent{background:var(--cream)}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.strength{background:#eff9f1;border-left:5px solid var(--green)}.action{background:#fff5df;border-left:5px solid var(--amber)}.finish{width:100%;border:1px solid var(--coral);background:#fff;color:var(--coral-deep)}
     @media(max-width:700px){.page{padding:10px}.card{padding:22px;border-radius:20px}.identity,.two{grid-template-columns:1fr}.choices{grid-template-columns:1fr 1fr}.top{top:4px}.progress{width:120px}.report header{display:grid}.badge{min-width:0}}
   </style>
 </head>
@@ -34,7 +34,7 @@
     </div>
     <p id="introMessage" class="message hidden"></p>
     <button id="beginButton" class="primary">开始填写</button>
-    <p class="note">每名学生最多填写2次，以最新一次作为当前分析样本。资料仅用于教育观察与辅导参考，不作为心理或医学诊断。</p>
+    <p class="note">新参与者可直接填写，首次提交时自动建立学生资料。每名学生最多填写2次，以最新一次作为当前分析样本。资料仅用于教育观察与辅导参考，不作为心理或医学诊断。</p>
   </section></main>
 
   <main id="survey" class="page hidden"><section class="card">
@@ -65,8 +65,8 @@
       ["LP_F01","调节与求助能力","感到学习压力时，我知道怎样让自己逐渐平静下来。"],["LP_F02","调节与求助能力","遇到无法解决的学习困难时，我愿意向他人求助。"],["LP_F03","调节与求助能力","我身边至少有一位愿意听我谈学习困难的人。"]];
     const choices=["从不","很少","有时","经常","几乎总是"], answers={};
     const $=id=>document.getElementById(id), show=id=>$(id).classList.remove("hidden"), hide=id=>$(id).classList.add("hidden");
-    questions.forEach((q,i)=>$("questions").insertAdjacentHTML("beforeend",`<fieldset><legend><b>${i+1}</b>${q[2]}</legend><div class="choices">${choices.map((c,j)=>`<label><input type="radio" name="${q[0]}" value="${j+1}">${c}</label>`).join("")}</div></fieldset>`));
-    $("questions").insertAdjacentHTML("beforeend",`<fieldset><legend><b>19</b>最近让你感到学习压力最大的一件事是什么？（选答）</legend><textarea id="open1"></textarea></fieldset><fieldset><legend><b>20</b>你希望老师、家长或学校为你提供什么帮助？（选答）</legend><textarea id="open2"></textarea></fieldset>`);
+    questions.forEach((q,i)=>$("questions").insertAdjacentHTML("beforeend",`<fieldset class="dim-${q[0].charAt(3).toLowerCase()}"><legend><b>${i+1}</b>${q[2]}</legend><div class="choices">${choices.map((c,j)=>`<label><input type="radio" name="${q[0]}" value="${j+1}">${c}</label>`).join("")}</div></fieldset>`));
+    $("questions").insertAdjacentHTML("beforeend",`<fieldset class="open"><legend><b>19</b>最近让你感到学习压力最大的一件事是什么？（选答）</legend><textarea id="open1"></textarea></fieldset><fieldset class="open"><legend><b>20</b>你希望老师、家长或学校为你提供什么帮助？（选答）</legend><textarea id="open2"></textarea></fieldset>`);
     $("questions").addEventListener("change",e=>{if(e.target.name)answers[e.target.name]=+e.target.value;const n=Object.keys(answers).length;$("bar").style.width=n/18*100+"%";$("count").textContent=n+"/18";$("submitButton").disabled=n!==18;$("submitButton").textContent=n===18?"提交并查看个人反馈":`还需完成 ${18-n} 题`;});
 
     function jsonp(params){
